@@ -13,5 +13,5 @@ interface ShipmentDeliveryNoteApiValidatorInterface
      *
      * @return array
      */
-    public function validate(ApiDataTransfer $apiDataTransfer);
+    public function validate(ApiDataTransfer $apiDataTransfer): array;
 }

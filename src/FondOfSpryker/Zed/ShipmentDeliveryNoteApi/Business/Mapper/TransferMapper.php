@@ -11,26 +11,8 @@ class TransferMapper implements TransferMapperInterface
      *
      * @return \Generated\Shared\Transfer\ShipmentDeliveryNoteTransfer
      */
-    public function toTransfer(array $data)
+    public function toTransfer(array $data): ShipmentDeliveryNoteTransfer
     {
-        $shipmentDeliveryNoteTransfer = new ShipmentDeliveryNoteTransfer();
-        $shipmentDeliveryNoteTransfer->fromArray($data, true);
-
-        return $shipmentDeliveryNoteTransfer;
-    }
-
-    /**
-     * @param array $data
-     *
-     * @return \Generated\Shared\Transfer\ShipmentDeliveryNoteTransfer[]
-     */
-    public function toTransferCollection(array $data)
-    {
-        $transferList = [];
-        foreach ($data as $itemData) {
-            $transferList[] = $this->toTransfer($itemData);
-        }
-
-        return $transferList;
+        return (new ShipmentDeliveryNoteTransfer())->fromArray($data, true);
     }
 }

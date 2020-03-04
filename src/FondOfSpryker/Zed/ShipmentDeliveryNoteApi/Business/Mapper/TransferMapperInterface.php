@@ -2,6 +2,8 @@
 
 namespace FondOfSpryker\Zed\ShipmentDeliveryNoteApi\Business\Mapper;
 
+use Generated\Shared\Transfer\ShipmentDeliveryNoteTransfer;
+
 interface TransferMapperInterface
 {
     /**
@@ -9,12 +11,5 @@ interface TransferMapperInterface
      *
      * @return \Generated\Shared\Transfer\ShipmentDeliveryNoteTransfer
      */
-    public function toTransfer(array $data);
-
-    /**
-     * @param array $shipmentDeliveryNoteEntityCollection
-     *
-     * @return \Generated\Shared\Transfer\ShipmentDeliveryNoteTransfer[]
-     */
-    public function toTransferCollection(array $shipmentDeliveryNoteEntityCollection);
+    public function toTransfer(array $data): ShipmentDeliveryNoteTransfer;
 }
