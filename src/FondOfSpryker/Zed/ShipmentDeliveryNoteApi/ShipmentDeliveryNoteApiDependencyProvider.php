@@ -10,7 +10,6 @@ use Spryker\Zed\Kernel\Container;
 class ShipmentDeliveryNoteApiDependencyProvider extends AbstractBundleDependencyProvider
 {
     public const QUERY_CONTAINER_API = 'QUERY_CONTAINER_API';
-
     public const FACADE_SHIPMENT_DELIVERY_NOTE = 'FACADE_SHIPMENT_DELIVERY_NOTE';
 
     /**
@@ -33,9 +32,9 @@ class ShipmentDeliveryNoteApiDependencyProvider extends AbstractBundleDependency
      *
      * @return \Spryker\Zed\Kernel\Container
      */
-    protected function addApiQueryContainer(Container $container)
+    protected function addApiQueryContainer(Container $container): Container
     {
-        $container[static::QUERY_CONTAINER_API] = function (Container $container) {
+        $container[static::QUERY_CONTAINER_API] = static function (Container $container) {
             return new ShipmentDeliveryNoteApiToApiQueryContainerBridge($container->getLocator()->api()->queryContainer());
         };
 
@@ -47,9 +46,9 @@ class ShipmentDeliveryNoteApiDependencyProvider extends AbstractBundleDependency
      *
      * @return \Spryker\Zed\Kernel\Container
      */
-    protected function addShipmentDeliveryNoteFacade(Container $container)
+    protected function addShipmentDeliveryNoteFacade(Container $container): Container
     {
-        $container[static::FACADE_SHIPMENT_DELIVERY_NOTE] = function (Container $container) {
+        $container[static::FACADE_SHIPMENT_DELIVERY_NOTE] = static function (Container $container) {
             return new ShipmentDeliveryNoteApiToShipmentDeliveryNoteBridge(
                 $container->getLocator()->shipmentDeliveryNote()->facade()
             );

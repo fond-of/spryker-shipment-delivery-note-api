@@ -15,13 +15,4 @@ interface ShipmentDeliveryNoteApiToShipmentDeliveryNoteInterface
     public function createShipmentDeliveryNote(
         ShipmentDeliveryNoteTransfer $shipmentDeliveryNoteTransfer
     ): ShipmentDeliveryNoteResponseTransfer;
-
-    /**
-     * @param \Generated\Shared\Transfer\ShipmentDeliveryNoteTransfer $shipmentDeliveryNoteTransfer
-     *
-     * @return \Generated\Shared\Transfer\ShipmentDeliveryNoteTransfer
-     */
-    public function findShipmentDeliveryNoteById(
-        ShipmentDeliveryNoteTransfer $shipmentDeliveryNoteTransfer
-    ): ShipmentDeliveryNoteTransfer;
 }
