@@ -18,7 +18,7 @@
   ],
   "require": {
     "php": ">=7.3",
-    "fond-of-spryker/shipment-delivery-note": "dev-feature/paypal-refund",
+    "fond-of-spryker/shipment-delivery-note": "*",
     "spryker/api": "^0.1.0 || ^0.2.0 || ^0.3.0",
     "spryker/api-query-builder": "^0.1.0",
     "spryker/log": "^1.0.0 || ^2.0.0 || ^3.0.0"
