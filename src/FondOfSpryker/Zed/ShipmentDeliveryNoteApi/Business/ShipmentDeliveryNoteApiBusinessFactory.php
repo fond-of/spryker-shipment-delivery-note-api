@@ -9,6 +9,7 @@ use FondOfSpryker\Zed\ShipmentDeliveryNoteApi\Business\Model\Validator\ShipmentD
 use FondOfSpryker\Zed\ShipmentDeliveryNoteApi\Dependency\Facade\ShipmentDeliveryNoteApiToShipmentDeliveryNoteInterface;
 use FondOfSpryker\Zed\ShipmentDeliveryNoteApi\Dependency\QueryContainer\ShipmentDeliveryNoteApiToApiQueryContainerInterface;
 use FondOfSpryker\Zed\ShipmentDeliveryNoteApi\ShipmentDeliveryNoteApiDependencyProvider;
+use Spryker\Shared\Log\LoggerTrait;
 use Spryker\Zed\Kernel\Business\AbstractBusinessFactory;
 
 /**
@@ -16,6 +17,8 @@ use Spryker\Zed\Kernel\Business\AbstractBusinessFactory;
  */
 class ShipmentDeliveryNoteApiBusinessFactory extends AbstractBusinessFactory
 {
+    use LoggerTrait;
+
     /**
      * @return \FondOfSpryker\Zed\ShipmentDeliveryNoteApi\Business\Model\ShipmentDeliveryNoteApiInterface
      */
@@ -24,7 +27,8 @@ class ShipmentDeliveryNoteApiBusinessFactory extends AbstractBusinessFactory
         return new ShipmentDeliveryNoteApi(
             $this->getApiQueryContainer(),
             $this->createTransferMapper(),
-            $this->getShipmentDeliveryNoteFacade()
+            $this->getShipmentDeliveryNoteFacade(),
+            $this->getLogger(),
         );
     }
 

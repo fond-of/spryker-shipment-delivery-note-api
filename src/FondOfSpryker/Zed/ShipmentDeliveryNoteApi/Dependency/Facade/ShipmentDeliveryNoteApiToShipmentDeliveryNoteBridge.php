@@ -14,8 +14,6 @@ class ShipmentDeliveryNoteApiToShipmentDeliveryNoteBridge implements ShipmentDel
     protected $shipmentDeliveryNoteFacade;
 
     /**
-     * ShipmentDeliveryNoteApiToShipmentDeliveryNoteBridge constructor.
-     *
      * @param \FondOfSpryker\Zed\ShipmentDeliveryNote\Business\ShipmentDeliveryNoteFacadeInterface $shipmentDeliveryNoteFacade
      */
     public function __construct(ShipmentDeliveryNoteFacadeInterface $shipmentDeliveryNoteFacade)
@@ -31,7 +29,6 @@ class ShipmentDeliveryNoteApiToShipmentDeliveryNoteBridge implements ShipmentDel
     public function createShipmentDeliveryNote(
         ShipmentDeliveryNoteTransfer $shipmentDeliveryNoteTransfer
     ): ShipmentDeliveryNoteResponseTransfer {
-
         return $this->shipmentDeliveryNoteFacade->createShipmentDeliveryNote($shipmentDeliveryNoteTransfer);
     }
 }

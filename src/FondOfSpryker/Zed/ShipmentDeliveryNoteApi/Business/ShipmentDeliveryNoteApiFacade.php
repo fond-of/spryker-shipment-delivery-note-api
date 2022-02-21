@@ -12,7 +12,7 @@ use Spryker\Zed\Kernel\Business\AbstractFacade;
 class ShipmentDeliveryNoteApiFacade extends AbstractFacade implements ShipmentDeliveryNoteApiFacadeInterface
 {
     /**
-     * {@inheritdoc}
+     * {@inheritDoc}
      *
      * @api
      *
@@ -28,7 +28,7 @@ class ShipmentDeliveryNoteApiFacade extends AbstractFacade implements ShipmentDe
     }
 
     /**
-     * {@inheritdoc}
+     * {@inheritDoc}
      *
      * @api
      *
