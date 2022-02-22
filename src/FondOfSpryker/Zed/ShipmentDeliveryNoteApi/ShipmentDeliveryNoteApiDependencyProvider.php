@@ -9,7 +9,14 @@ use Spryker\Zed\Kernel\Container;
 
 class ShipmentDeliveryNoteApiDependencyProvider extends AbstractBundleDependencyProvider
 {
+    /**
+     * @var string
+     */
     public const QUERY_CONTAINER_API = 'QUERY_CONTAINER_API';
+
+    /**
+     * @var string
+     */
     public const FACADE_SHIPMENT_DELIVERY_NOTE = 'FACADE_SHIPMENT_DELIVERY_NOTE';
 
     /**
@@ -50,7 +57,7 @@ class ShipmentDeliveryNoteApiDependencyProvider extends AbstractBundleDependency
     {
         $container[static::FACADE_SHIPMENT_DELIVERY_NOTE] = static function (Container $container) {
             return new ShipmentDeliveryNoteApiToShipmentDeliveryNoteBridge(
-                $container->getLocator()->shipmentDeliveryNote()->facade()
+                $container->getLocator()->shipmentDeliveryNote()->facade(),
             );
         };
 

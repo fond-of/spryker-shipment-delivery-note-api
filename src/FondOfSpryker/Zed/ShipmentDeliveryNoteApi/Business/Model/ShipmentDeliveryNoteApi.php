@@ -7,6 +7,7 @@ use FondOfSpryker\Zed\ShipmentDeliveryNoteApi\Dependency\Facade\ShipmentDelivery
 use FondOfSpryker\Zed\ShipmentDeliveryNoteApi\Dependency\QueryContainer\ShipmentDeliveryNoteApiToApiQueryContainerInterface;
 use Generated\Shared\Transfer\ApiDataTransfer;
 use Generated\Shared\Transfer\ApiItemTransfer;
+use Psr\Log\LoggerInterface;
 use Spryker\Zed\Api\ApiConfig;
 use Spryker\Zed\Api\Business\Exception\EntityNotSavedException;
 
@@ -28,20 +29,26 @@ class ShipmentDeliveryNoteApi implements ShipmentDeliveryNoteApiInterface
     protected $transferMapper;
 
     /**
-     * ShipmentDeliveryNoteApi constructor.
-     *
+     * @var \Psr\Log\LoggerInterface
+     */
+    protected $logger;
+
+    /**
      * @param \FondOfSpryker\Zed\ShipmentDeliveryNoteApi\Dependency\QueryContainer\ShipmentDeliveryNoteApiToApiQueryContainerInterface $apiQueryContainer
      * @param \FondOfSpryker\Zed\ShipmentDeliveryNoteApi\Business\Mapper\TransferMapperInterface $transferMapper
      * @param \FondOfSpryker\Zed\ShipmentDeliveryNoteApi\Dependency\Facade\ShipmentDeliveryNoteApiToShipmentDeliveryNoteInterface $shipmentDeliveryNoteFacade
+     * @param \Psr\Log\LoggerInterface $logger
      */
     public function __construct(
         ShipmentDeliveryNoteApiToApiQueryContainerInterface $apiQueryContainer,
         TransferMapperInterface $transferMapper,
-        ShipmentDeliveryNoteApiToShipmentDeliveryNoteInterface $shipmentDeliveryNoteFacade
+        ShipmentDeliveryNoteApiToShipmentDeliveryNoteInterface $shipmentDeliveryNoteFacade,
+        LoggerInterface $logger
     ) {
         $this->apiQueryContainer = $apiQueryContainer;
         $this->shipmentDeliveryNoteFacade = $shipmentDeliveryNoteFacade;
         $this->transferMapper = $transferMapper;
+        $this->logger = $logger;
     }
 
     /**
@@ -58,21 +65,27 @@ class ShipmentDeliveryNoteApi implements ShipmentDeliveryNoteApiInterface
         $shipmentDeliveryNoteTransfer = $this->transferMapper->toTransfer($data);
 
         $shipmentDeliveryNoteResponseTransfer = $this->shipmentDeliveryNoteFacade->createShipmentDeliveryNote(
-            $shipmentDeliveryNoteTransfer
+            $shipmentDeliveryNoteTransfer,
         );
 
         $shipmentDeliveryNoteTransfer = $shipmentDeliveryNoteResponseTransfer->getShipmentDeliveryNoteTransfer();
 
         if ($shipmentDeliveryNoteTransfer === null || $shipmentDeliveryNoteResponseTransfer->getIsSuccess() === false) {
+            $errors = [];
+            foreach ($shipmentDeliveryNoteResponseTransfer->getErrors() as $error) {
+                $errors[] = $error->getMessage();
+            }
+            $this->logger->error('Could not save shipment delivery note.', ['data' => $data, 'error' => $errors]);
+
             throw new EntityNotSavedException(
                 'Could not save shipment delivery note.',
-                ApiConfig::HTTP_CODE_INTERNAL_ERROR
+                ApiConfig::HTTP_CODE_INTERNAL_ERROR,
             );
         }
 
         return $this->apiQueryContainer->createApiItem(
             $shipmentDeliveryNoteTransfer,
-            $shipmentDeliveryNoteTransfer->getIdShipmentDeliveryNote()
+            $shipmentDeliveryNoteTransfer->getIdShipmentDeliveryNote(),
         );
     }
 }

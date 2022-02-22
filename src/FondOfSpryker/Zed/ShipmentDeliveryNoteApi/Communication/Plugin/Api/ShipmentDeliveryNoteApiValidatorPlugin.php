@@ -10,6 +10,7 @@ use Spryker\Zed\Kernel\Communication\AbstractPlugin;
 /**
  * @method \FondOfSpryker\Zed\ShipmentDeliveryNoteApi\Business\ShipmentDeliveryNoteApiFacadeInterface getFacade()
  * @method \FondOfSpryker\Zed\ShipmentDeliveryNoteApi\Business\ShipmentDeliveryNoteApiBusinessFactory getFactory()
+ * @method \FondOfSpryker\Zed\ShipmentDeliveryNoteApi\ShipmentDeliveryNoteApiConfig getConfig()
  */
 class ShipmentDeliveryNoteApiValidatorPlugin extends AbstractPlugin implements ApiValidatorPluginInterface
 {
@@ -24,7 +25,7 @@ class ShipmentDeliveryNoteApiValidatorPlugin extends AbstractPlugin implements A
     /**
      * @param \Generated\Shared\Transfer\ApiDataTransfer $apiDataTransfer
      *
-     * @return \Generated\Shared\Transfer\ApiValidationErrorTransfer[]
+     * @return array<\Generated\Shared\Transfer\ApiValidationErrorTransfer>
      */
     public function validate(ApiDataTransfer $apiDataTransfer): array
     {
