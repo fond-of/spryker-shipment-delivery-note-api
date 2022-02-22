@@ -12,11 +12,15 @@ use Spryker\Zed\Kernel\Business\AbstractFacade;
 class ShipmentDeliveryNoteApiFacade extends AbstractFacade implements ShipmentDeliveryNoteApiFacadeInterface
 {
     /**
+     * {@inheritdoc}
+     *
+     * @api
+     *
      * @param \Generated\Shared\Transfer\ApiDataTransfer $apiDataTransfer
      *
      * @return \Generated\Shared\Transfer\ApiItemTransfer
      */
-    public function addShipmentDeliveryNote(ApiDataTransfer $apiDataTransfer)
+    public function addShipmentDeliveryNote(ApiDataTransfer $apiDataTransfer): ApiItemTransfer
     {
          return $this->getFactory()
             ->createShipmentDeliveryNoteApi()
@@ -32,7 +36,7 @@ class ShipmentDeliveryNoteApiFacade extends AbstractFacade implements ShipmentDe
      *
      * @return array
      */
-    public function validate(ApiDataTransfer $apiDataTransfer)
+    public function validate(ApiDataTransfer $apiDataTransfer): array
     {
         return $this->getFactory()
             ->createShipmentDeliveryNoteApiValidator()

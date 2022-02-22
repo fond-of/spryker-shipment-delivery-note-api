@@ -3,6 +3,7 @@
 namespace FondOfSpryker\Zed\ShipmentDeliveryNoteApi\Business\Model;
 
 use Generated\Shared\Transfer\ApiDataTransfer;
+use Generated\Shared\Transfer\ApiItemTransfer;
 
 interface ShipmentDeliveryNoteApiInterface
 {
@@ -11,5 +12,5 @@ interface ShipmentDeliveryNoteApiInterface
      *
      * @return \Generated\Shared\Transfer\ApiItemTransfer
      */
-    public function add(ApiDataTransfer $apiDataTransfer);
+    public function add(ApiDataTransfer $apiDataTransfer): ApiItemTransfer;
 }

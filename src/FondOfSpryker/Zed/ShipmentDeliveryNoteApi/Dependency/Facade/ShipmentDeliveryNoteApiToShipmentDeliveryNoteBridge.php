@@ -25,24 +25,13 @@ class ShipmentDeliveryNoteApiToShipmentDeliveryNoteBridge implements ShipmentDel
 
     /**
      * @param \Generated\Shared\Transfer\ShipmentDeliveryNoteTransfer $shipmentDeliveryNoteTransfer
-     * @param array $itemCollection
      *
      * @return \Generated\Shared\Transfer\ShipmentDeliveryNoteResponseTransfer
      */
-    public function addShipmentDeliveryNote(
-        ShipmentDeliveryNoteTransfer $shipmentDeliveryNoteTransfer,
-        array $itemCollection): ShipmentDeliveryNoteResponseTransfer
-    {
-        return $this->shipmentDeliveryNoteFacade->addShipmentDeliveryNote($shipmentDeliveryNoteTransfer);
-    }
+    public function createShipmentDeliveryNote(
+        ShipmentDeliveryNoteTransfer $shipmentDeliveryNoteTransfer
+    ): ShipmentDeliveryNoteResponseTransfer {
 
-    /**
-     * @param \Generated\Shared\Transfer\ShipmentDeliveryNoteTransfer $shipmentDeliveryNoteTransfer
-     *
-     * @return \Generated\Shared\Transfer\ShipmentDeliveryNoteTransfer
-     */
-    public function findShipmentDeliveryNoteById(ShipmentDeliveryNoteTransfer $shipmentDeliveryNoteTransfer): ShipmentDeliveryNoteTransfer
-    {
-        return $this->shipmentDeliveryNoteFacade->findShipmentDeliveryNoteById($shipmentDeliveryNoteTransfer);
+        return $this->shipmentDeliveryNoteFacade->createShipmentDeliveryNote($shipmentDeliveryNoteTransfer);
     }
 }

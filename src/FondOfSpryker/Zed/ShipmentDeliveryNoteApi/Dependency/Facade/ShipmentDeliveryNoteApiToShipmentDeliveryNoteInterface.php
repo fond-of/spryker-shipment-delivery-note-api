@@ -9,18 +9,10 @@ interface ShipmentDeliveryNoteApiToShipmentDeliveryNoteInterface
 {
     /**
      * @param \Generated\Shared\Transfer\ShipmentDeliveryNoteTransfer $shipmentDeliveryNoteTransfer
-     * @param array $itemCollection
      *
      * @return \Generated\Shared\Transfer\ShipmentDeliveryNoteResponseTransfer
      */
-    public function addShipmentDeliveryNote(
-        ShipmentDeliveryNoteTransfer $shipmentDeliveryNoteTransfer,
-        array $itemCollection): ShipmentDeliveryNoteResponseTransfer;
-
-    /**
-     * @param \Generated\Shared\Transfer\ShipmentDeliveryNoteTransfer $shipmentDeliveryNoteTransfer
-     * 
-     * @return \Generated\Shared\Transfer\ShipmentDeliveryNoteTransfer
-     */
-    public function findShipmentDeliveryNoteById(ShipmentDeliveryNoteTransfer $shipmentDeliveryNoteTransfer): ShipmentDeliveryNoteTransfer;
+    public function createShipmentDeliveryNote(
+        ShipmentDeliveryNoteTransfer $shipmentDeliveryNoteTransfer
+    ): ShipmentDeliveryNoteResponseTransfer;
 }

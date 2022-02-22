@@ -3,6 +3,7 @@
 namespace FondOfSpryker\Zed\ShipmentDeliveryNoteApi\Business;
 
 use Generated\Shared\Transfer\ApiDataTransfer;
+use Generated\Shared\Transfer\ApiItemTransfer;
 
 /**
  * @method \FondOfSpryker\Zed\ShipmentDeliveryNoteApi\Business\ShipmentDeliveryNoteApiBusinessFactory getFactory()
@@ -11,6 +12,7 @@ interface ShipmentDeliveryNoteApiFacadeInterface
 {
     /**
      * Specification:
+     * - Adds new shipment delivery note.
      *
      * @api
      *
@@ -18,11 +20,11 @@ interface ShipmentDeliveryNoteApiFacadeInterface
      *
      * @return \Generated\Shared\Transfer\ApiItemTransfer
      */
-    public function addShipmentDeliveryNote(ApiDataTransfer $apiDataTransfer);
+    public function addShipmentDeliveryNote(ApiDataTransfer $apiDataTransfer): ApiItemTransfer;
 
     /**
      * Specification:
-     * - Validates the given API data and returns an array of errors if necessary.
+     * - Validates given api data.
      *
      * @api
      *
@@ -30,5 +32,5 @@ interface ShipmentDeliveryNoteApiFacadeInterface
      *
      * @return array
      */
-    public function validate(ApiDataTransfer $apiDataTransfer);
+    public function validate(ApiDataTransfer $apiDataTransfer): array;
 }
