@@ -6,8 +6,8 @@ use FondOfSpryker\Zed\ShipmentDeliveryNoteApi\Business\Mapper\TransferMapper;
 use FondOfSpryker\Zed\ShipmentDeliveryNoteApi\Business\Mapper\TransferMapperInterface;
 use FondOfSpryker\Zed\ShipmentDeliveryNoteApi\Business\Model\ShipmentDeliveryNoteApi;
 use FondOfSpryker\Zed\ShipmentDeliveryNoteApi\Business\Model\Validator\ShipmentDeliveryNoteApiValidator;
+use FondOfSpryker\Zed\ShipmentDeliveryNoteApi\Dependency\Facade\ShipmentDeliveryNoteApiToApiFacadeInterface;
 use FondOfSpryker\Zed\ShipmentDeliveryNoteApi\Dependency\Facade\ShipmentDeliveryNoteApiToShipmentDeliveryNoteInterface;
-use FondOfSpryker\Zed\ShipmentDeliveryNoteApi\Dependency\QueryContainer\ShipmentDeliveryNoteApiToApiQueryContainerInterface;
 use FondOfSpryker\Zed\ShipmentDeliveryNoteApi\ShipmentDeliveryNoteApiDependencyProvider;
 use Spryker\Shared\Log\LoggerTrait;
 use Spryker\Zed\Kernel\Business\AbstractBusinessFactory;
@@ -25,7 +25,7 @@ class ShipmentDeliveryNoteApiBusinessFactory extends AbstractBusinessFactory
     public function createShipmentDeliveryNoteApi()
     {
         return new ShipmentDeliveryNoteApi(
-            $this->getApiQueryContainer(),
+            $this->getApiFacade(),
             $this->createTransferMapper(),
             $this->getShipmentDeliveryNoteFacade(),
             $this->getLogger(),
@@ -33,11 +33,11 @@ class ShipmentDeliveryNoteApiBusinessFactory extends AbstractBusinessFactory
     }
 
     /**
-     * @return \FondOfSpryker\Zed\ShipmentDeliveryNoteApi\Dependency\QueryContainer\ShipmentDeliveryNoteApiToApiQueryContainerInterface
+     * @return \FondOfSpryker\Zed\ShipmentDeliveryNoteApi\Dependency\Facade\ShipmentDeliveryNoteApiToApiFacadeInterface
      */
-    protected function getApiQueryContainer(): ShipmentDeliveryNoteApiToApiQueryContainerInterface
+    protected function getApiFacade(): ShipmentDeliveryNoteApiToApiFacadeInterface
     {
-        return $this->getProvidedDependency(ShipmentDeliveryNoteApiDependencyProvider::QUERY_CONTAINER_API);
+        return $this->getProvidedDependency(ShipmentDeliveryNoteApiDependencyProvider::FACADE_API);
     }
 
     /**

@@ -2,8 +2,8 @@
 
 namespace FondOfSpryker\Zed\ShipmentDeliveryNoteApi;
 
+use FondOfSpryker\Zed\ShipmentDeliveryNoteApi\Dependency\Facade\ShipmentDeliveryNoteApiToApiFacadeBridge;
 use FondOfSpryker\Zed\ShipmentDeliveryNoteApi\Dependency\Facade\ShipmentDeliveryNoteApiToShipmentDeliveryNoteBridge;
-use FondOfSpryker\Zed\ShipmentDeliveryNoteApi\Dependency\QueryContainer\ShipmentDeliveryNoteApiToApiQueryContainerBridge;
 use Spryker\Zed\Kernel\AbstractBundleDependencyProvider;
 use Spryker\Zed\Kernel\Container;
 
@@ -12,7 +12,7 @@ class ShipmentDeliveryNoteApiDependencyProvider extends AbstractBundleDependency
     /**
      * @var string
      */
-    public const QUERY_CONTAINER_API = 'QUERY_CONTAINER_API';
+    public const FACADE_API = 'FACADE_API';
 
     /**
      * @var string
@@ -28,7 +28,7 @@ class ShipmentDeliveryNoteApiDependencyProvider extends AbstractBundleDependency
     {
         $container = parent::provideBusinessLayerDependencies($container);
 
-        $container = $this->addApiQueryContainer($container);
+        $container = $this->addApiFacade($container);
         $container = $this->addShipmentDeliveryNoteFacade($container);
 
         return $container;
@@ -39,10 +39,10 @@ class ShipmentDeliveryNoteApiDependencyProvider extends AbstractBundleDependency
      *
      * @return \Spryker\Zed\Kernel\Container
      */
-    protected function addApiQueryContainer(Container $container): Container
+    protected function addApiFacade(Container $container): Container
     {
-        $container[static::QUERY_CONTAINER_API] = static function (Container $container) {
-            return new ShipmentDeliveryNoteApiToApiQueryContainerBridge($container->getLocator()->api()->queryContainer());
+        $container[static::FACADE_API] = static function (Container $container) {
+            return new ShipmentDeliveryNoteApiToApiFacadeBridge($container->getLocator()->api()->facade());
         };
 
         return $container;

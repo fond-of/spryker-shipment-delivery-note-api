@@ -4,6 +4,7 @@ namespace FondOfSpryker\Zed\ShipmentDeliveryNoteApi\Business;
 
 use Generated\Shared\Transfer\ApiDataTransfer;
 use Generated\Shared\Transfer\ApiItemTransfer;
+use Generated\Shared\Transfer\ApiRequestTransfer;
 use Spryker\Zed\Kernel\Business\AbstractFacade;
 
 /**
@@ -32,14 +33,14 @@ class ShipmentDeliveryNoteApiFacade extends AbstractFacade implements ShipmentDe
      *
      * @api
      *
-     * @param \Generated\Shared\Transfer\ApiDataTransfer $apiDataTransfer
+     * @param \Generated\Shared\Transfer\ApiRequestTransfer $apiRequestTransfer
      *
      * @return array
      */
-    public function validate(ApiDataTransfer $apiDataTransfer): array
+    public function validate(ApiRequestTransfer $apiRequestTransfer): array
     {
         return $this->getFactory()
             ->createShipmentDeliveryNoteApiValidator()
-            ->validate($apiDataTransfer);
+            ->validate($apiRequestTransfer);
     }
 }

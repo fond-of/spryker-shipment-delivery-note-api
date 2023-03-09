@@ -3,8 +3,8 @@
 namespace FondOfSpryker\Zed\ShipmentDeliveryNoteApi\Business\Model;
 
 use FondOfSpryker\Zed\ShipmentDeliveryNoteApi\Business\Mapper\TransferMapperInterface;
+use FondOfSpryker\Zed\ShipmentDeliveryNoteApi\Dependency\Facade\ShipmentDeliveryNoteApiToApiFacadeInterface;
 use FondOfSpryker\Zed\ShipmentDeliveryNoteApi\Dependency\Facade\ShipmentDeliveryNoteApiToShipmentDeliveryNoteInterface;
-use FondOfSpryker\Zed\ShipmentDeliveryNoteApi\Dependency\QueryContainer\ShipmentDeliveryNoteApiToApiQueryContainerInterface;
 use Generated\Shared\Transfer\ApiDataTransfer;
 use Generated\Shared\Transfer\ApiItemTransfer;
 use Psr\Log\LoggerInterface;
@@ -14,38 +14,38 @@ use Spryker\Zed\Api\Business\Exception\EntityNotSavedException;
 class ShipmentDeliveryNoteApi implements ShipmentDeliveryNoteApiInterface
 {
     /**
-     * @var \FondOfSpryker\Zed\ShipmentDeliveryNoteApi\Dependency\QueryContainer\ShipmentDeliveryNoteApiToApiQueryContainerInterface
+     * @var \FondOfSpryker\Zed\ShipmentDeliveryNoteApi\Dependency\Facade\ShipmentDeliveryNoteApiToApiFacadeInterface
      */
-    protected $apiQueryContainer;
+    protected ShipmentDeliveryNoteApiToApiFacadeInterface $apiFacade;
 
     /**
      * @var \FondOfSpryker\Zed\ShipmentDeliveryNoteApi\Dependency\Facade\ShipmentDeliveryNoteApiToShipmentDeliveryNoteInterface
      */
-    protected $shipmentDeliveryNoteFacade;
+    protected ShipmentDeliveryNoteApiToShipmentDeliveryNoteInterface $shipmentDeliveryNoteFacade;
 
     /**
      * @var \FondOfSpryker\Zed\ShipmentDeliveryNoteApi\Business\Mapper\TransferMapperInterface
      */
-    protected $transferMapper;
+    protected TransferMapperInterface $transferMapper;
 
     /**
      * @var \Psr\Log\LoggerInterface
      */
-    protected $logger;
+    protected LoggerInterface $logger;
 
     /**
-     * @param \FondOfSpryker\Zed\ShipmentDeliveryNoteApi\Dependency\QueryContainer\ShipmentDeliveryNoteApiToApiQueryContainerInterface $apiQueryContainer
+     * @param \FondOfSpryker\Zed\ShipmentDeliveryNoteApi\Dependency\Facade\ShipmentDeliveryNoteApiToApiFacadeInterface $apiFacade
      * @param \FondOfSpryker\Zed\ShipmentDeliveryNoteApi\Business\Mapper\TransferMapperInterface $transferMapper
      * @param \FondOfSpryker\Zed\ShipmentDeliveryNoteApi\Dependency\Facade\ShipmentDeliveryNoteApiToShipmentDeliveryNoteInterface $shipmentDeliveryNoteFacade
      * @param \Psr\Log\LoggerInterface $logger
      */
     public function __construct(
-        ShipmentDeliveryNoteApiToApiQueryContainerInterface $apiQueryContainer,
+        ShipmentDeliveryNoteApiToApiFacadeInterface $apiFacade,
         TransferMapperInterface $transferMapper,
         ShipmentDeliveryNoteApiToShipmentDeliveryNoteInterface $shipmentDeliveryNoteFacade,
         LoggerInterface $logger
     ) {
-        $this->apiQueryContainer = $apiQueryContainer;
+        $this->apiFacade = $apiFacade;
         $this->shipmentDeliveryNoteFacade = $shipmentDeliveryNoteFacade;
         $this->transferMapper = $transferMapper;
         $this->logger = $logger;
@@ -60,7 +60,7 @@ class ShipmentDeliveryNoteApi implements ShipmentDeliveryNoteApiInterface
      */
     public function add(ApiDataTransfer $apiDataTransfer): ApiItemTransfer
     {
-        $data = (array)$apiDataTransfer->getData();
+        $data = $apiDataTransfer->getData();
 
         $shipmentDeliveryNoteTransfer = $this->transferMapper->toTransfer($data);
 
@@ -83,7 +83,7 @@ class ShipmentDeliveryNoteApi implements ShipmentDeliveryNoteApiInterface
             );
         }
 
-        return $this->apiQueryContainer->createApiItem(
+        return $this->apiFacade->createApiItem(
             $shipmentDeliveryNoteTransfer,
             $shipmentDeliveryNoteTransfer->getIdShipmentDeliveryNote(),
         );

@@ -2,16 +2,16 @@
 
 namespace FondOfSpryker\Zed\ShipmentDeliveryNoteApi\Business\Model\Validator;
 
-use Generated\Shared\Transfer\ApiDataTransfer;
+use Generated\Shared\Transfer\ApiRequestTransfer;
 
 class ShipmentDeliveryNoteApiValidator implements ShipmentDeliveryNoteApiValidatorInterface
 {
     /**
-     * @param \Generated\Shared\Transfer\ApiDataTransfer $apiDataTransfer
+     * @param \Generated\Shared\Transfer\ApiRequestTransfer $apiRequestTransfer
      *
      * @return array
      */
-    public function validate(ApiDataTransfer $apiDataTransfer): array
+    public function validate(ApiRequestTransfer $apiRequestTransfer): array
     {
         return [];
     }
